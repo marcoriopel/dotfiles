@@ -121,62 +121,32 @@ bindkey "^[[B" history-substring-search-down
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias k=kubectl
-alias kk='HTTPS_PROXY=socks5://127.0.0.1:9898 k'
 alias watch="watch "
 alias xargs="xargs "
+alias gs='git status'
+alias gc='git commit'
+alias gp='git pull --rebase'
+alias gcam='git commit -am'
+alias deletens='kubectl get ns -oname | egrep "^namespace/$1-.*" | xargs kubectl delete'
+
+
+
+
+
 export GPG_TTY=$(tty)
 export GPG_TTY=$(tty)
 export GONOPROXY=*
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin:/Users/marrio
-export PATH="/Users/marrio/.local/bin:$PATH"
-export PATH=/opt/homebrew/bin:$PATH
-export https_proxy=http://127.0.0.1:9000
-export http_proxy=$https_proxy
-export HTTPS_PROXY=$https_proxy
-export HTTP_PROXY=$https_proxy
-export SSL_CERT_DIR=~/.certificates
-export REQUESTS_CA_BUNDLE=$SSL_CERT_FILE
-export CORPO_NET=y
-
-deletens() {
-	kubectl get ns -oname | egrep "^namespace/$1-.*" | xargs kubectl delete
-}
-
-tp() {
-export HTTPS_PROXY=socks5://127.0.0.1:9898
-}
-
-proxy() {
-export https_proxy=http://127.0.0.1:9000
-export http_proxy=$https_proxy
-export HTTPS_PROXY=$https_proxy
-export HTTP_PROXY=$https_proxy
-}
-unproxy() {
-unset https_proxy
-unset http_proxy
-unset HTTPS_PROXY
-unset HTTP_PROXY
-}
-unproxyall() {
-unset GPG_TTY
-unset GPG_TTY
-unset https_proxy
-unset http_proxy
-unset HTTPS_PROXY
-unset HTTP_PROXY
-unset SSL_CERT_FILE
-unset SSL_CERT_DIR
-unset REQUESTS_CA_BUNDLE
-unset CORPO_NET
-}
-
-export GPG_TTY=$(tty)
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 export PYENV_ROOT="$HOME/.pyenv"
+
+
+
+
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+eval "$(pyenv init --path)"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
